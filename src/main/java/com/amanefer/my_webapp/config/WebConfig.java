@@ -1,5 +1,6 @@
 package com.amanefer.my_webapp.config;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -24,10 +24,10 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
 @Configuration
 @ComponentScan("com.amanefer.my_webapp")
 @PropertySource("classpath:hibernate.properties")
-@EnableJpaRepositories("com.amanefer.my_webapp.repositories")
 @EnableTransactionManagement
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
@@ -85,21 +85,24 @@ public class WebConfig implements WebMvcConfigurer {
         return dataSource;
     }
 
-    private Properties hibernateProperties() {
+    public Properties hibernateProperties() {
         Properties properties = new Properties();
 
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
 
         return properties;
     }
+
+
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.amanefer.my_webapp.models");
+        em.setPackagesToScan(environment.getRequiredProperty("db.models.package"));
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
@@ -108,6 +111,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         return em;
     }
+
 
     @Bean
     public PlatformTransactionManager transactionManager() {
