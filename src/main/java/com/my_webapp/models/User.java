@@ -1,4 +1,4 @@
-package com.amanefer.my_webapp.models;
+package com.my_webapp.models;
 
 import jakarta.persistence.*;
 

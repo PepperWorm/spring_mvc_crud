@@ -1,7 +1,7 @@
-package com.amanefer.my_webapp.controllers;
+package com.my_webapp.controllers;
 
-import com.amanefer.my_webapp.models.User;
-import com.amanefer.my_webapp.service.UserService;
+import com.my_webapp.models.User;
+import com.my_webapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +25,8 @@ public class UsersController {
         return "index";
     }
 
-    @GetMapping("/{id}")
-    public String showUser(@PathVariable("id") int id, Model model) {
+    @GetMapping("/show")
+    public String showUser(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         return "show";
     }
@@ -42,20 +42,20 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editUser(@PathVariable("id") int id, Model model) {
+    @GetMapping("/edit")
+    public String editUser(@RequestParam("id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
         return "edit";
     }
 
-    @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute("user") User user, @RequestParam("id") int id) {
         userService.updateUser(id, user);
         return "redirect:/";
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") int id) {
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam("id") int id) {
         userService.deleteUser(id);
         return "redirect:/";
     }

@@ -1,7 +1,7 @@
-package com.amanefer.my_webapp.service;
+package com.my_webapp.service;
 
-import com.amanefer.my_webapp.dao.UserDao;
-import com.amanefer.my_webapp.models.User;
+import com.my_webapp.dao.UserDao;
+import com.my_webapp.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

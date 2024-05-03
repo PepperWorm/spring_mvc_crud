@@ -1,6 +1,6 @@
-package com.amanefer.my_webapp.service;
+package com.my_webapp.service;
 
-import com.amanefer.my_webapp.models.User;
+import com.my_webapp.models.User;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.amanefer.my_webapp.config;
+package com.my_webapp.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

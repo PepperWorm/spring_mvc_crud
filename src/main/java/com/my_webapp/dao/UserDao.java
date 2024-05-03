@@ -1,6 +1,6 @@
-package com.amanefer.my_webapp.dao;
+package com.my_webapp.dao;
 
-import com.amanefer.my_webapp.models.User;
+import com.my_webapp.models.User;
 
 import java.util.List;
 
